@@ -15,9 +15,17 @@
     
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.content}}</li>
+      <div class="row">
+          <div class="col-md-2">
+            <img id = "icon" src="https://picsee.co/images/social_twitter.png">
+          </div>
+          <div class = "col-md-10">
+            <ul>{{tweet.name}}</ul>
+            <li>{{tweet.content}}</li>
+          </div>
+      </div>
+    </br></br>
       {% endfor %}
-      
     </div>
   </div>
     
