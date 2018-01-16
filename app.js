@@ -3,8 +3,12 @@ const app = express();
 var http = require("http");
 const chalk = require('chalk');
 const nunjucks = require('nunjucks');
+const routes = require('./routes');
+app.use('/', routes);
+app.use(express.static('public'))
+
 //var router = express.Router();
-http.createServer(app).listen(3000);
+app.listen(3000);
 var person = [{name : "Danielle"},
           {name : "Dhara"},
           {name : "Emile"}
@@ -13,24 +17,18 @@ var person = [{name : "Danielle"},
 app.set('view engine', 'html')
 app.engine('html', nunjucks.render);
 nunjucks.configure('views', { noCache : true});
-nunjucks.render('index.html',{title : "A cool Twitter App", person : person}
-);
 
-app.use('/', function (req, res, next){
-    console.log(chalk.magenta(req.method), chalk.yellow(req.originalUrl), chalk.blue(res.statusCode));
-    next();
-});
+// app.use('/', function (req, res, next){
+//     console.log(chalk.magenta(req.method), chalk.yellow(req.originalUrl), chalk.blue(res.statusCode));
+//     next();
+// });
 
-app.get('/',function (req, res){
-    res.sendStatus(200);
-    res.nunjucks.render('index.html',{title : "A cool Twitter App", person : person}
-    );
-  //  res.render('index', function(err, html) {
-  res.send(html);
-});
+// app.get('/',function (req, res){
+//   res.render( 'index', {title: 'Hall of Fame', people: person} );
+// });
 
-//app.use('/', router);
-app.listen = function() {
-    var server = http.createServer(this);
-    return server.listen.apply(server, arg);
-}
+
+// app.listen = function() {
+//     var server = http.createServer(this);
+//     return server.listen.apply(server, arg);
+// }
