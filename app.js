@@ -1,10 +1,11 @@
 const express = require( 'express' );
 const app = express();
 var http = require("http");
+const chalk = require('chalk');
 //var router = express.Router();
 http.createServer(app).listen(3000);
 app.use('/', function (req, res, next){
-    console.log(req.method, req.originalUrl, res.statusCode);
+    console.log(chalk.magenta(req.method), chalk.yellow(req.originalUrl), chalk.blue(res.statusCode));
     next();
 });
 // app.use(function (req, res){
@@ -21,3 +22,4 @@ app.listen = function() {
     var server = http.createServer(this);
     return server.listen.apply(server, arg);
 }
+
